@@ -7,7 +7,7 @@ install:
   - go get github.com/Masterminds/glide
   - glide install
 script:
-  - cd tests && go test
+  - go test $(glide novendor)
 notifications:
   slack:
     rooms:

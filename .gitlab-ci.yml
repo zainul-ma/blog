@@ -1,0 +1,15 @@
+image: go:1.8.1
+services:
+  - mysql
+stages:
+  - build
+  - test
+build-project:
+  stage: build
+  script:
+    - go get github.com/Masterminds/glide
+    - glide install
+test-project:
+  stage: test
+  script:
+    - go test $(glide novendor)
