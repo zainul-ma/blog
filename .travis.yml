@@ -7,6 +7,7 @@ before_install:
   - cd $HOME/gopath/src/
   - git clone --depth=50 --branch=master https://github.com/zainul-ma/blog.git
   - cd $HOME/gopath/src/blog
+  - go get github.com/mattn/goveralls
 install:
   - go get github.com/Masterminds/glide
   - glide install
@@ -15,6 +16,7 @@ script:
   - go env
   - pwd
   - go test $(glide novendor)
+  - $HOME/gopath/bin/goveralls -service=travis-ci
 notifications:
   slack:
     rooms:
