@@ -3,12 +3,11 @@ go:
   - 1.8.1
 services:
   - mysql
+before_install:
+  - git clone --depth=50 --branch=master https://github.com/zainul-ma/blog.git
 install:
   - go get github.com/Masterminds/glide
   - glide install
-before_script:
-  - export GOPATH=$TRAVIS_BUILD_DIR
-  - export PATH=$HOME/gopath/bin:$PATH
 script:
   - ls -lah
   - go env
