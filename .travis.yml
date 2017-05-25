@@ -6,7 +6,7 @@ services:
 install:
   - go get github.com/Masterminds/glide
   - glide install
-before_install:
+before_script:
   - export GOPATH=$TRAVIS_BUILD_DIR
   - export PATH=$HOME/gopath/bin:$PATH
 script:
