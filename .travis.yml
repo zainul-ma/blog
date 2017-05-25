@@ -17,7 +17,7 @@ script:
   - go env
   - pwd
   - go test $(glide novendor)
-  - gometalinter --vendor ./...
+  #- gometalinter --vendor ./...
   - $HOME/gopath/bin/goveralls -service=travis-ci
 notifications:
   slack:
