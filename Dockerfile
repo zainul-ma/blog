@@ -1,19 +1,23 @@
-FROM golang
+FROM golang:1.8.1
 
-# Godep for vendoring
-RUN go get github.com/tools/godep
+ENV GOPATH /go
 
-# Recompile the standard library without CGO
-RUN CGO_ENABLED=0 go install -a std
+ENV PATH $GOPATH/bin:$PATH
 
-ENV APP_DIR $GOPATH/app
-RUN mkdir -p $APP_DIR
+RUN mkdir -p /go/src/blog
 
-# Set the entrypoint
-ENTRYPOINT (cd $APP_DIR && ./app)
-ADD . $APP_DIR
+ADD . /go/src/blog
 
-# Compile the binary and statically link
-RUN cd $APP_DIR && CGO_ENABLED=0 godep go build -ldflags '-d -w -s'
+RUN go get github.com/Masterminds/glide
+
+RUN go get github.com/beego/bee
+
+RUN go build -o /go/src/blog/blog /go/src/blog/main.go
+
+RUN chmod 755 /go/src/blog/blog
+
+WORKDIR /go/src
 
 EXPOSE 8080
+
+CMD ["/go/src/blog/blog"]
