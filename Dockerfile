@@ -1,5 +1,7 @@
 FROM golang:1.8.1
 
+MAINTAINER apalahitunamanya2 "zainul.ma@tnis.com"
+
 ENV GOPATH /go
 
 ENV PATH $GOPATH/bin:$PATH
